@@ -51,7 +51,7 @@ private Q_SLOTS:
 
 
     /**
-     * @brief verify is the login process is't ok
+     * @brief verify is the method launch an error if the username is wrong
      */
     void loginUserWrong() {
         try {
@@ -63,7 +63,7 @@ private Q_SLOTS:
 
 
     /**
-     * @brief verify is the login process is't ok
+     * @brief verify is the method launch an error if the password is wrong
      */
     void loginPasswordWrong() {
         try {
@@ -75,22 +75,22 @@ private Q_SLOTS:
 
 
     /**
-     * @brief verify is the login process is't ok
+     * @brief verify is the method launch an error if the cas url is wrong
      */
     void casUrlWrong() {
         try {
-            QCAS::CAS("https://www.example.com/cas/v1/tickets",username,password,serviceUrl);
+            QCAS::CAS("http://www.example.com/cas/v1/tickets",username,password,serviceUrl);
             QFAIL("This test must to fail");
         } catch(CASException &exception) {
         }
     }
 
     /**
-     * @brief verify is the login process is't ok
+     * @brief verify is the method launch an error if the service url is wrong
      */
     void serviceUrlWrong() {
         try {
-            QCAS::CAS(casUrl,username,password,"https://www.example.com/service");
+            QCAS::CAS(casUrl,username,password,"http://www.example.com/service");
             QFAIL("This test must to fail");
         } catch(CASException &exception) {
         }

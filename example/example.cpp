@@ -30,7 +30,8 @@ int main(int argc, char *argv[]) {
     QString serviceUrl = args.at(4);
 
     try{
-        qDebug() << QCAS::CAS(casUrl,username,password,serviceUrl);
+        QString ticket = QCAS::CAS(casUrl,username,password,serviceUrl);
+        qDebug() << "Ticket for the service " + serviceUrl + ": " + ticket;
     } catch(CASException &exception) {
         qWarning() << exception.what();
     }
