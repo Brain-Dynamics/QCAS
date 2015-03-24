@@ -1,0 +1,103 @@
+/*
+ * File:
+ * Author: daniel.agredano
+ * Email: daniel.agredano at brain-dynamics.es
+ *
+ * Created on 24/03/2015
+ *
+ *
+ */
+
+#ifndef QCASTEST_H
+#define QCASTEST_H
+
+#include <QtTest>
+#include <QObject>
+#include <QCAS/QCAS.h>
+
+class QCASTest : public QObject {
+    Q_OBJECT
+public:
+    QCASTest() {}
+
+private:
+    QString casUrl;
+    QString username;
+    QString password;
+    QString serviceUrl;
+
+private Q_SLOTS:
+    /**
+     * @brief initTestCase: Initalizes the test, in this case adding test data
+     */
+    void initTestCase() {
+        casUrl = "@TEST_DATA_CAS_URL@";
+        username = "@TEST_DATA_USERNAME@";
+        password = "@TEST_DATA_PASSWORD@";
+        serviceUrl = "@TEST_DATA_SERVICE_URL@";
+    }
+
+    /**
+     * @brief verify is the login process is't ok
+     */
+    void loginOK() {
+        try {
+            QString ticket = QCAS::CAS(casUrl,username,password,serviceUrl);
+            QVERIFY(ticket.contains("ST"));
+        } catch(CASException &exception) {
+            QFAIL(exception.what());
+        }
+    }
+
+
+    /**
+     * @brief verify is the login process is't ok
+     */
+    void loginUserWrong() {
+        try {
+            QCAS::CAS(casUrl,"username2",password,serviceUrl);
+            QFAIL("This test must to fail");
+        } catch(CASException &exception) {
+        }
+    }
+
+
+    /**
+     * @brief verify is the login process is't ok
+     */
+    void loginPasswordWrong() {
+        try {
+            QCAS::CAS(casUrl,username,"password2",serviceUrl);
+            QFAIL("This test must to fail");
+        } catch(CASException &exception) {
+        }
+    }
+
+
+    /**
+     * @brief verify is the login process is't ok
+     */
+    void casUrlWrong() {
+        try {
+            QCAS::CAS("https://www.example.com/cas/v1/tickets",username,password,serviceUrl);
+            QFAIL("This test must to fail");
+        } catch(CASException &exception) {
+        }
+    }
+
+    /**
+     * @brief verify is the login process is't ok
+     */
+    void serviceUrlWrong() {
+        try {
+            QCAS::CAS(casUrl,username,password,"https://www.example.com/service");
+            QFAIL("This test must to fail");
+        } catch(CASException &exception) {
+        }
+    }
+};
+
+QTEST_MAIN(QCASTest)
+#include "QCASTest.moc"
+
+#endif // QCASTEST_H
