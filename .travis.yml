@@ -6,3 +6,6 @@ script:
 - cd build
 - cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCUMENTATION=ON
 - make
+notifications:
+  email:
+    - daniel.agredano@brain-dynamics.es
