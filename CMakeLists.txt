@@ -6,9 +6,17 @@ set(VERSION_PATCH 0)
 mark_as_advanced(VERSION_MAJOR VERSION_MINOR VERSION_PATCH)
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
-if(CMAKE_SYSTEM_NAME STREQUAL Linux)
-  set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
-endif(CMAKE_SYSTEM_NAME STREQUAL Linux)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
+
+if(LINUX OR CMAKE_COMPILER_IS_GNUCXX) # Clang OR Gcc (Linux, Mac OS or Win32 with MingW)
+    # Enable C++11 and displays all warnings
+    set(CMAKE_CXX_FLAGS "-Wall -std=c++11")
+endif()
+
+set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -Wall -fprofile-arcs -ftest-coverage -O0")
+set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -Wall -fprofile-arcs -ftest-coverage -O0")
+set (CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -g -Wall -fprofile-arcs -ftest-coverage -O0")
+
 
 find_package(Qt4 REQUIRED)
 aux_source_directory( src/ SRC_LIST)
@@ -38,14 +46,15 @@ set_target_properties( ${PROJECT_NAME} example
 )
 
 install(TARGETS ${PROJECT_NAME}
-        LIBRARY DESTINATION lib)
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib)
 
 install(DIRECTORY include/ DESTINATION include/
         FILES_MATCHING PATTERN "*.h")
 
 
 ###### BUILD TESTS ######
-option(BUILD_TESTS "Build the tests of the library" OFF)
+option(BUILD_TESTS "Build the tests and coverage targets" OFF)
 if(BUILD_TESTS)
     set(CMAKE_AUTOMOC ON)
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -82,7 +91,6 @@ if(BUILD_TESTS)
     # Create the executables
     add_executable(QCASTest ${PROJECT_BINARY_DIR}/tests/QCASTest.cpp ${INCLUDE_LIST})
     target_link_libraries(QCASTest ${PROJECT_NAME} Qt4::QtTest)
-
     set_target_properties(QCASTest
         PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"

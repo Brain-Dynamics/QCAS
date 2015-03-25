@@ -55,8 +55,8 @@ private Q_SLOTS:
      */
     void loginUserWrong() {
         try {
-            QCAS::CAS(casUrl,"username2",password,serviceUrl);
-            QFAIL("This test must to fail");
+            QCAS::CAS(casUrl,"usernameFake",password,serviceUrl);
+            QFAIL("This test must to fail. Or in your CAS server exists a user with this usrname");
         } catch(CASException &exception) {
         }
     }
@@ -67,8 +67,8 @@ private Q_SLOTS:
      */
     void loginPasswordWrong() {
         try {
-            QCAS::CAS(casUrl,username,"password2",serviceUrl);
-            QFAIL("This test must to fail");
+            QCAS::CAS(casUrl,username,"passwordFake",serviceUrl);
+            QFAIL("This test must to fail. Or the password of your user is \"passwordFake\"");
         } catch(CASException &exception) {
         }
     }
@@ -80,7 +80,7 @@ private Q_SLOTS:
     void casUrlWrong() {
         try {
             QCAS::CAS("http://www.example.com/cas/v1/tickets",username,password,serviceUrl);
-            QFAIL("This test must to fail");
+            QFAIL("This test must to fail.");
         } catch(CASException &exception) {
         }
     }
@@ -91,7 +91,7 @@ private Q_SLOTS:
     void serviceUrlWrong() {
         try {
             QCAS::CAS(casUrl,username,password,"http://www.example.com/service");
-            QFAIL("This test must to fail");
+            QFAIL("This test must to fail. Check your CAS server allowed services filter.");
         } catch(CASException &exception) {
         }
     }

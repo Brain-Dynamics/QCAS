@@ -10,6 +10,12 @@ To use this package you only need the following dependencies.
 * Qt (4.8.6)
 * CMAKE (2.8)
 
+And for the coverage you are going to need.
+
+* lcov
+*  genhtml
+
+
 You also need to have enable the REST Api of the CAS server to access the service. In the middle of this [link](http://jasig.github.io/cas/4.0.x/protocol/REST-Protocol.html) you can find cas server configuration to enable it.
 
 ## Compiling and installing the project
@@ -20,9 +26,9 @@ Some possible cmake options:
 
   - `-DCMAKE_BUILD_TYPE=DEBUG`: Enables some debug output (other than making easier to debug the code)
   - `-DBUILD_DOCUMENTATION=ON`: Builds the doxygen documentation     
-  - `-DBUILD_TESTS=ON`: Builds the unit tests, and you need the following option to build the tests
-	  - `-DTEST_DATA_CAS_URL=https://www.example.com/cas/v1/tickets`: A url of a CAS server to launch the tests
-	  - `-DTEST_DATA_SERVICE_URL=https://www.example.com/service`: A url of a service to launch the tests
+  - `-DBUILD_TESTS=ON`: Builds the unit tests and coverage (only in Debug Build), you need the following options to build the tests
+	  - `-DTEST_DATA_CAS_URL=http://www.example.com/cas/v1/tickets`: A url of a CAS server to launch the tests (non ssl)
+	  - `-DTEST_DATA_SERVICE_URL=http://www.example.com/service`: A url of a service to launch the tests (non ssl)
 	  - `-DTEST_DATA_USERNAME=username`: The username of a test user
 	  - `-DTEST_DATA_PASSWORD=password`: The password of the test user
   - `-DCMAKE_INSTALL_PREFIX=/custom/path/`: Install QCAS in a custom directory
@@ -36,11 +42,23 @@ $ cmake ../QCAS -DCMAKE_INSTALL_PREFIX=_preferred_path_ ..
 $ make
 $ make install
 ```
+If you want to compile the test and coverage targets, you have to setup the project with the Debug build type and add the test data variables in cmake. After that, you can execute the tests with the following command.
 
+```{r, engine='sh', count_lines}
+$ make
+$ make test
+```
+And for the coverage with this other (you can see the results in the coverage folder in the QCAS-build directory).
+
+```{r, engine='sh', count_lines}
+$ make
+$ make coverage
+```
+The coverage target ONLY works if the tests were passed
 
 ## How to use the QCAS project.
 
-To use the package you need the following parameters.
+To use the library you need the following parameters.
 
 * **casUrl:** This is the url of the CAS server endpoint ticket generator. You need to include the path to the REST API service.
 * **username:** The username of the user that is going to authenticate.
@@ -75,7 +93,7 @@ int main(int argc, char *argv[]) {
 
     try{
         // Getting the ticket
-        QString ticket = QCAS::CAS(casUrl,username,password,serviceUrl);
+        QString ticket = QCAS::CAS(casUrl,username,password,serviceUrl,true);
         qDebug() << "Ticket for the service " + serviceUrl + ": " + ticket;
     } catch(CASException &exception) {
         // If there's an error, show it!
