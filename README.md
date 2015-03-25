@@ -35,25 +35,25 @@ Some possible cmake options:
 
 For compile and install you can follow the nexts steps.
 
-```{r, engine='sh', count_lines}
+~~~shell
 $ mkdir QCAS-build
 $ cd QCAS-build
 $ cmake ../QCAS -DCMAKE_INSTALL_PREFIX=_preferred_path_ ..
 $ make
 $ make install
-```
+~~~
 If you want to compile the test and coverage targets, you have to setup the project with the Debug build type and add the test data variables in cmake. After that, you can execute the tests with the following command.
 
-```{r, engine='sh', count_lines}
+~~~shell
 $ make
 $ make test
-```
+~~~
 And for the coverage with this other (you can see the results in the coverage folder in the QCAS-build directory).
 
-```{r, engine='sh', count_lines}
+~~~shell
 $ make
 $ make coverage
-```
+~~~
 The coverage target ONLY works if the tests were passed
 
 ## How to use the QCAS project.
@@ -110,4 +110,4 @@ int main(int argc, char *argv[]) {
 
 
 ### Development by
-[![Brain Dynamics](http://www.brain-dynamics.es/images/bdync.png)](http://www.brain-dynamics.es)
+![Brain Dynamics](http://www.brain-dynamics.es/images/bdync.png)

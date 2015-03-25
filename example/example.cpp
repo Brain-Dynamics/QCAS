@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 
     try{
         // Getting the ticket
-        QString ticket = QCAS::CAS(casUrl,username,password,serviceUrl);
+        QString ticket = QCAS::CAS(casUrl,username,password,serviceUrl,true);
         qDebug() << "Ticket for the service " + serviceUrl + ": " + ticket;
     } catch(CASException &exception) {
         // If there's an error, show it!
