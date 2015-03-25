@@ -96,9 +96,13 @@ if(BUILD_TESTS)
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
 
-    # Add the test to the project
+    # Add the test target
     enable_testing()
     add_test(testCAST "${CMAKE_BINARY_DIR}/bin/QCASTest" )
+
+    # Add the coverage target
+    setup_target_for_coverage(coverage "${CMAKE_BINARY_DIR}/bin/QCASTest" coverage)
+
 endif()
 
 
