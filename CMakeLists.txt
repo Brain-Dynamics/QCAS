@@ -6,13 +6,25 @@ set(VERSION_PATCH 0)
 mark_as_advanced(VERSION_MAJOR VERSION_MINOR VERSION_PATCH)
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
+if(CMAKE_SYSTEM_NAME STREQUAL Linux)
+  set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
+endif(CMAKE_SYSTEM_NAME STREQUAL Linux)
+
 find_package(Qt4 REQUIRED)
 aux_source_directory( src/ SRC_LIST)
 
 file( GLOB_RECURSE INCLUDE_LIST include/*.h )
 include_directories( include )
 
-add_library(${PROJECT_NAME}  ${INCLUDE_LIST} ${SRC_LIST})
+option(BUILD_SHARED "Build libraries shared." OFF)
+
+if(BUILD_SHARED)
+  set(LIBRARY_TYPE SHARED)
+else(BUILD_SHARED)
+  set(LIBRARY_TYPE STATIC)
+endif(BUILD_SHARED)
+
+add_library(${PROJECT_NAME} ${LIBRARY_TYPE} ${INCLUDE_LIST} ${SRC_LIST})
 target_link_libraries(${PROJECT_NAME} Qt4::QtCore Qt4::QtNetwork)
 
 add_executable(example example/example.cpp ${INCLUDE_LIST})
@@ -24,6 +36,12 @@ set_target_properties( ${PROJECT_NAME} example
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+
+install(TARGETS ${PROJECT_NAME}
+        LIBRARY DESTINATION lib)
+
+install(DIRECTORY include/ DESTINATION include/
+        FILES_MATCHING PATTERN "*.h")
 
 
 ###### BUILD TESTS ######
