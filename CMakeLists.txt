@@ -91,16 +91,21 @@ if(BUILD_TESTS)
     # Create the executables
     add_executable(QCASTest ${PROJECT_BINARY_DIR}/tests/QCASTest.cpp ${INCLUDE_LIST})
     target_link_libraries(QCASTest ${PROJECT_NAME} Qt4::QtTest)
+    if(CMAKE_COMPILER_IS_GNUCXX)
+        target_link_libraries(QCASTest gcov)
+    endif()
     set_target_properties(QCASTest
         PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
+
 
     # Add the test target
     enable_testing()
     add_test(testCAST "${CMAKE_BINARY_DIR}/bin/QCASTest" )
 
     # Add the coverage target
+    include(CodeCoverage)
     setup_target_for_coverage(coverage "${CMAKE_BINARY_DIR}/bin/QCASTest" coverage)
 
 endif()
