@@ -12,8 +12,7 @@ To use this package you only need the following dependencies.
 
 And for the coverage you are going to need.
 
-* lcov
-*  genhtml
+* lcov >= 1.11
 
 
 You also need to have enable the REST Api of the CAS server to access the service. In the middle of this [link](http://jasig.github.io/cas/4.0.x/protocol/REST-Protocol.html) you can find cas server configuration to enable it.
