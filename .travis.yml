@@ -16,6 +16,7 @@ before_script:
   - mkdir build
   - cd build
   - cmake ..
+  - cat Makefile
 script:
   - make
 branches:
