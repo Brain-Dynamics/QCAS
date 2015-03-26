@@ -1,12 +1,22 @@
 language: cpp
+compiler:
+  - clang
+  - gcc
 install:
-- sudo apt-get update
-- sudo apt-get install --yes g++ cmake doxygen libqt4-dev libqt4-network libqt4-test libqtcore4 qt4-dev-tools qt4-qmake
+  - sudo apt-get update
+  - sudo apt-get install --yes g++ cmake doxygen libqt4-dev libqt4-network libqt4-test libqtcore4 qt4-dev-tools qt4-qmake
 script:
-- mkdir build
-- cd build
-- cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCUMENTATION=ON
-- make
+  - mkdir build
+  - cd build
+  - cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCUMENTATION=ON
+  - make
+os:
+  - linux
+  - osx
+branches:
+  only:
+    - master
+osx_image: xcode61
 notifications:
   email:
     - daniel.agredano@brain-dynamics.es
