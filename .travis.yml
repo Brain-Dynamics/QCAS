@@ -1,8 +1,7 @@
 language: cpp
 install:
 - sudo apt-get update
-- sudo apt-get upgrade
-- sudo apt-get install --yes g++ cmake doxygen
+- sudo apt-get install --yes g++ cmake doxygen libqt4-dev libqt4-network libqt4-test libqtcore4 qt4-dev-tools qt4-qmake
 script:
 - mkdir build
 - cd build
