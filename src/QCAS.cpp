@@ -18,6 +18,7 @@
 #include <QEventLoop>
 #include <QHostInfo>
 #include <QRegExp>
+#include <QString>
 #include <QUrl>
 
 
