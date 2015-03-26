@@ -104,3 +104,10 @@ QString QCAS::CAS(const QString &casUrl,
 
     return serviceAnswer;
 }
+
+
+
+// ----------------------------------------------------------------------------------- //
+CASException::CASException(QString message) :
+    std::runtime_error(message.toStdString()) {
+}

@@ -11,7 +11,7 @@
 #ifndef QCAS_H
 #define QCAS_H
 
-#include <stdlib.h>
+#include <stdexcept>
 
 class QString;
 
@@ -53,14 +53,13 @@ public:
  * @brief The CASException class is thrown when an error happens
  * during the ticket getting process
  */
-class CASException: public std::runtime_error {
+class CASException: public  std::runtime_error {
 public:
     /**
      * @brief CASException: Main constructor of the exception
      * @param message: is the exception message.
      */
-    CASException(const QString& message):
-        std::runtime_error(message.toStdString()) {}
+    CASException(QString message);
 };
 
 #endif // QCAS_H
