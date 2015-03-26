@@ -9,6 +9,7 @@ compiler:
 before_install:
   - cat /etc/issue
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+  - sudo add-apt-repository --yes ppa:kalakris/cmake
   - sudo apt-get update -qq
   - sudo apt-get install -qq cmake
   - sudo apt-get install -qq qt4-dev-tools
