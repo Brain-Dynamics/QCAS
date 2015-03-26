@@ -3,20 +3,16 @@ compiler:
   - clang
   - gcc
 install:
-  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get update && sudo apt-get install --yes g++ cmake doxygen libqt4-dev libqt4-network libqt4-test libqtcore4 qt4-dev-tools qt4-qmake; fi
-  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install g++ cmake doxygen libqt4-dev libqt4-network libqt4-test libqtcore4 qt4-dev-tools qt4-qmake; fi
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq cmake qt4-dev-tools g++ doxygen libqt4-dev libqt4-network libqt4-test
 script:
   - mkdir build
   - cd build
   - cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCUMENTATION=ON
   - make
-os:
-  - linux
-  - osx
 branches:
   only:
     - master
-osx_image: xcode61
 notifications:
   email:
     - daniel.agredano@brain-dynamics.es
