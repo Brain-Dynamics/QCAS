@@ -1,4 +1,4 @@
-# QCAS
+# QCAS [![Build Status](https://travis-ci.org/Brain-Dynamics/QCAS.svg?branch=master)](https://travis-ci.org/Brain-Dynamics/QCAS) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Brain-Dynamics/qcas/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 A Qt library for getting tickets from a Central Authentication Service (CAS Server)
 
 This library allows authentication against a CAS Server and retrieve a ticket for a service. For that, you only have to do a call to a single method with the URL of the CAS server with the correct path, the user's credentials and the login URL of the service that you want to access.
