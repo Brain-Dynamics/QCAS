@@ -11,8 +11,9 @@
 #ifndef QCAS_H
 #define QCAS_H
 
-#include <QString>
 #include <stdlib.h>
+
+class QString;
 
 /**
  * @brief The QCAS class manages all the operations for retrive a
