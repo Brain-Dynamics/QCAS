@@ -17,7 +17,8 @@ before_script:
   - mkdir build
   - cd build
   - cmake ..
-  - cat Makefile
+  - cat CMakeFiles/QCAS.dir/depend.make
+  - cat /usr/include/qt4/QtNetwork/QNetworkAccessManager
 script:
   - make VERBOSE=1
 branches:
