@@ -9,6 +9,7 @@
  */
 
 #include "QCAS/QCAS.h"
+#include <QtNetwork>
 #include <QNetworkConfigurationManager>
 #include <QNetworkAccessManager>
 #include <QNetworkConfiguration>
