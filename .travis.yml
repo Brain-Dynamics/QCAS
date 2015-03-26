@@ -1,4 +1,8 @@
 language: cpp
+cache:
+  apt: true
+  directories:
+    - build
 compiler:
   #- clang
   - gcc
