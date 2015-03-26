@@ -39,7 +39,7 @@ else(BUILD_SHARED)
 endif(BUILD_SHARED)
 
 add_library(${PROJECT_NAME} ${LIBRARY_TYPE} ${INCLUDE_LIST} ${SRC_LIST})
-target_link_libraries(${PROJECT_NAME} Qt4::QtCore Qt4::QtNetwork)
+target_link_libraries(${PROJECT_NAME} Qt4::QtNetwork Qt4::QtCore)
 
 add_executable(example example/example.cpp ${INCLUDE_LIST})
 target_link_libraries(example ${PROJECT_NAME})
