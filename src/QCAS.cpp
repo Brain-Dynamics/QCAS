@@ -9,14 +9,11 @@
  */
 
 #include "QCAS/QCAS.h"
-#include <QNetworkConfigurationManager>
 #include <QNetworkAccessManager>
-#include <QNetworkConfiguration>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QStringList>
 #include <QEventLoop>
-#include <QHostInfo>
 #include <QRegExp>
 #include <QString>
 #include <QUrl>
