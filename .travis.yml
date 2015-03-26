@@ -12,7 +12,7 @@ before_script:
   - mkdir build
   - cd build
   - cmake ..
-after_success:
+script:
   - make
 branches:
   only:
