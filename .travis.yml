@@ -17,7 +17,7 @@ before_script:
   - mkdir build
   - cd build
   - cmake ..
-  - cmake -LAH
+  - cat Makefile
 script:
   - make VERBOSE=1
 branches:
