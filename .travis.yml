@@ -17,6 +17,7 @@ before_script:
   - mkdir build
   - cd build
   - cmake ..
+  - cmake -LAH
 script:
   - make VERBOSE=1
 branches:
